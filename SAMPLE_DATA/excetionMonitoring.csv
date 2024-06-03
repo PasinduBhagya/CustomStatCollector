@@ -1,0 +1,15 @@
+ExceptionName,Count
+ExceptionTranslationFilter,362
+NumberFormatException,190
+SMTPAddressFailedException,190
+NoRouteToHostException,102
+ExecutionException,98
+ElasticsearchException,49
+ConnectException,45
+IOException,28
+InternalAuthenticationServiceException,12
+AuthenticationException,10
+NullPointerException,10
+FileNotFoundException,8
+ArrayIndexOutOfBoundsException,1
+IllegalArgumentException,1
