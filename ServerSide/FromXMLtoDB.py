@@ -1,26 +1,36 @@
-from xml.dom import minidom
+import requests
+import xml.etree.ElementTree as ET
 
-# parse an xml file by name
-file = minidom.parse('models.xml')
+def getResponse(url):
+  tagList = []
+  response = requests.get(url)
+  xml_content = response.content
 
-#use getElementsByTagName() to get tag
-models = file.getElementsByTagName('model')
+  root = ET.fromstring(xml_content)
 
-# one specific item attribute
-print('model #2 attribute:')
-print(models[1].attributes['name'].value)
+  items = root.findall('.//item')
 
-# all item attributes
-print('\nAll attributes:')
-for elem in models:
-  print(elem.attributes['name'].value)
+  for item in items:
+    for child in item:
+        tag = child.tag
+        tagList.append(tag)
+    break
+  
+  return items, tagList
 
-# one specific item's data
-print('\nmodel #2 data:')
-print(models[1].firstChild.data)
-print(models[1].childNodes[0].data)
+def main():
+  with open('fetchingURLs.txt', 'r') as FURLS:
+    for URL in FURLS:
+      if (len(URL.strip()) != 0):
+        print("Checking " + URL)
+        items, tagList = getResponse(URL.strip())
+        for item in items:
+          for tag in tagList:
+              try:
+                print(tag + "\t" + item.find(tag).text)
+              except AttributeError:
+                print(tag + "\t" + str(item.find(tag)))
+              except:
+                pass
 
-# all items data
-print('\nAll model data:')
-for elem in models:
-  print(elem.firstChild.data)
+main()

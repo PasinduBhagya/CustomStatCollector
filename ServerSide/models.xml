@@ -1,0 +1,16 @@
+<codenStats>
+  <sample_data1>
+    <item>
+      <FolderName>Folder1</FolderName>
+      <Size>10GB</Size>
+    </item>
+    <item>
+    <FolderName>Folder2</FolderName>
+      <Size>30GB</Size>
+    </item>
+    <item>
+      <FolderName>Folder3</FolderName>
+      <Size>15GB</Size>
+    </item>
+  </sample_data1>
+</codenStats>

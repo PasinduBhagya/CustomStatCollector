@@ -4,6 +4,9 @@ from configparser import ConfigParser
 config = ConfigParser()
 config.read("./configurations.cfg")
 
+def encrypt():
+    pass
+
 def csvToXML(csvFileName):
 
     csvFilePath = f"./{config.get('FOLDER_PATH', 'INPUT_FOLDER_PATH')}/{csvFileName}"
