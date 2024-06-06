@@ -1,3 +1,5 @@
 ClientSide/SAMPLE_DATA
 ServerSide/SAMPLE_DATA
 html
+ServerSide/configurations.cfg
+ClientSide/configurations.cfg
