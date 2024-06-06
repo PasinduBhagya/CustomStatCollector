@@ -4,12 +4,13 @@ import mysql.connector
 from datetime import datetime
 from configparser import ConfigParser
 
+
 config = ConfigParser()
 config.read('./configurations.cfg')
 
 def createSQLQuery(tagList):
   # values = (ProjectName, YEAR, MONTH, BOOKING_COUNT, PAX_COUNT, QUOTE_COUNT, QUOTE_PAX_COUNT)
-  TABLE_NAME = config.get('DATABASE', 'TABLE_NAME'), # Tablename should get from the Config File.
+  TABLE_NAME = config.get('DATABASE', 'TABLE_NAME')
 
   TableColumns = ("(" + ", ".join(tagList) + ")")
   TableColumnStrings = []
@@ -29,6 +30,7 @@ def connectToDatabase():
         password=config.get('DATABASE', 'PASSWORD'),
         database=config.get('DATABASE', 'DATABASE'),
     )
+
 
 def addtoDB(valuesDictionary, tagList, SQL_QUERY):
   database = connectToDatabase()
@@ -73,7 +75,7 @@ def getResponse(url):
     return None
 
 def main():
-  with open('fetchingURLs.conf', 'r') as FURLS:
+  with open('fetchingURLs.txt', 'r') as FURLS:
     for URL in FURLS:
       URL = URL.strip()
       if (len(URL) != 0):
