@@ -2,6 +2,11 @@ import requests
 import xml.etree.ElementTree as ET
 from datetime import datetime
 
+def addToDB():
+  # sql_query = """INSERT INTO tbx_bookings_quotes_count_reports (ProjectName, YEAR, MONTH, BOOKING_COUNT, PAX_COUNT, QUOTE_COUNT, QUOTE_PAX_COUNT) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
+  # values = (ProjectName, YEAR, MONTH, BOOKING_COUNT, PAX_COUNT, QUOTE_COUNT, QUOTE_PAX_COUNT)
+  pass
+
 def getResponse(url):
   tagList = []
   response = requests.get(url)
