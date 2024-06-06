@@ -1,5 +1,8 @@
 import csv
 from configparser import ConfigParser
+from datetime import datetime
+
+datetime.now().strftime("%Y-%m-%d")
 
 config = ConfigParser()
 config.read("./configurations.cfg")
@@ -21,6 +24,9 @@ def csvToXML(csvFileName):
 
         with open(xmlFilePath, 'w') as xmlFile:
             xmlFile.write(f"<{csvFileName}>\n")
+            xmlFile.write(f"<UpdatedDate>\n")
+            xmlFile.write(f'{(datetime.now().strftime("%Y-%m-%d")).strip()}\n')
+            xmlFile.write(f"</UpdatedDate>\n")
             for line in csv_reader:
                 xmlFile.write("\t<item>\n")
                 for i in range(headerLength):
