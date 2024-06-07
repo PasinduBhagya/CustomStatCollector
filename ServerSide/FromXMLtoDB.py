@@ -4,12 +4,10 @@ import mysql.connector
 from datetime import datetime
 from configparser import ConfigParser
 
-
 config = ConfigParser()
 config.read('./configurations.cfg')
 
 def createSQLQuery(tagList):
-  # values = (ProjectName, YEAR, MONTH, BOOKING_COUNT, PAX_COUNT, QUOTE_COUNT, QUOTE_PAX_COUNT)
   TABLE_NAME = config.get('DATABASE', 'TABLE_NAME')
 
   TableColumns = ("(" + ", ".join(tagList) + ")")
@@ -38,14 +36,10 @@ def addtoDB(valuesDictionary, tagList, SQL_QUERY):
   
   valuesList = []
   
-  for tag in tagList: # ['Year', 'MONTH', 'BOOKING_COUNT', 'PAX_COUNT', 'QUOTE_COUNT', 'QUOTE_PAX_COUNT']
+  for tag in tagList:
     valuesList.append(valuesDictionary[tag])
   
   valuesForSQLQuery = tuple(valuesList)
-  print("-"*40)
-  print(SQL_QUERY)
-  print(valuesForSQLQuery)
-  print("-"*40)
 
   dbcursor.execute(SQL_QUERY, valuesForSQLQuery)
   database.commit()
@@ -75,7 +69,7 @@ def getResponse(url):
     return None
 
 def main():
-  with open('fetchingURLs.txt', 'r') as FURLS:
+  with open('fetchingURLs.conf', 'r') as FURLS:
     for URL in FURLS:
       URL = URL.strip()
       if (len(URL) != 0):
@@ -85,24 +79,12 @@ def main():
           items, tagList = getResponse(URL)
           SQL_QUERY = createSQLQuery(tagList)
 
-          # <item>
-            # <ProjectName>YAS</ProjectName>
-            # <Year>2024</Year>
-            # <MONTH>JAN</MONTH>
-            # <BOOKING_COUNT>574</BOOKING_COUNT>
-            # <PAX_COUNT>2031</PAX_COUNT>
-            # <QUOTE_COUNT>358</QUOTE_COUNT>
-            # <QUOTE_PAX_COUNT>1313</QUOTE_PAX_COUNT>
-          # </item>
-          
           for item in items:
             valuesDictionary = {}
-            for tag in tagList: # ['Year', 'MONTH', 'BOOKING_COUNT', 'PAX_COUNT', 'QUOTE_COUNT', 'QUOTE_PAX_COUNT']
+            for tag in tagList:
                 try:
-                  # print(tag + "\t" + item.find(tag).text)
                   valuesDictionary[tag] = item.find(tag).text
                 except AttributeError:
-                  # print(tag + "\t" + str(item.find(tag)))
                   valuesDictionary[tag] = item.find(tag)
                 except:
                   pass

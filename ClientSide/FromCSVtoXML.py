@@ -23,10 +23,10 @@ def csvToXML(csvFileName):
         headerLength = len(header)
 
         with open(xmlFilePath, 'w') as xmlFile:
-            xmlFile.write(f"<{csvFileName}>\n")
-            xmlFile.write(f"<UpdatedDate>\n")
-            xmlFile.write(f'{(datetime.now().strftime("%Y-%m-%d")).strip()}\n')
-            xmlFile.write(f"</UpdatedDate>\n")
+            xmlFile.write(f"<{csvFileName}>")
+            xmlFile.write(f"<UpdatedDate>")
+            xmlFile.write(f'{(datetime.now().strftime("%Y-%m-%d")).strip()}')
+            xmlFile.write(f"</UpdatedDate>")
             for line in csv_reader:
                 xmlFile.write("\t<item>\n")
                 for i in range(headerLength):
